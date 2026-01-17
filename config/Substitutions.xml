@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <item name="ПРИВ" value="ПРИВЕТ" />
+  <item name="ЗДАРОВА" value="ПРИВЕТ" />
+  <item name="ЗДРАСТЕ" value="ЗДРАВСТВУЙТЕ" />
+  <item name="ЗДРАВСТВУЙ" value="ЗДРАВСТВУЙТЕ" />
+  <item name="ДОБРЫЙ ДЕНЬ" value="ЗДРАВСТВУЙТЕ" />
+  <item name="СПС" value="СПАСИБО" />
+  <item name="ПЖ" value="ПОЖАЛУЙСТА" />
+  <item name="ПЛЗ" value="ПОЖАЛУЙСТА" />
+  <item name="ПОКА" value="ДО СВИДАНИЯ" />
+  <item name="ББ" value="ДО СВИДАНИЯ" />
+
+  <item name="ЧЕ" value="ЧТО" />
+  <item name="ЧО" value="ЧТО" />
+  <item name="ШО" value="ЧТО" />
+  <item name="КТО ТАКАЯ" value="ЧТО ТАКОЕ" /> <item name="КТО ТАКОЙ" value="ЧТО ТАКОЕ" />
+  <item name="ЧТО ЗА" value="ЧТО ТАКОЕ" />
+  
+  <item name=" РАССКАЖИ ПРО " value=" РАССКАЖИ О " />
+  <item name=" ПОГОВОРИМ ПРО " value=" ПОГОВОРИМ О " />
+  <item name=" ПРО " value=" О " />
+  <item name=" ЕЩЁ " value=" ЕЩЕ " /> <item name="))" value=" smile " />
+  <item name="))" value=" smile " />
+  <item name="((" value=" sad " />
+  
+  <item name="NAME=RESET" value="" />
+  <item name=":-)" value=" smile " />
+  <item name="&quot;" value="" />
+  <item name="/" value=" " />
+  <item name="WANNA" value=" want to " />
+  <item name="YOU'RE" value=" you are " />
+  </root>

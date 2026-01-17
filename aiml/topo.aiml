@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+
+  <category>
+    <pattern>ПРИВЕТ</pattern>
+    <template>
+      <condition name="user-name">
+        <li value="">
+          Привет! Я бот для рассказов о топографических знаках. Как тебя зовут?
+          <think><set name="askname">yes</set></think>
+        </li>
+        <li>
+          Здравствуй, <get name="user-name"/>! Рад снова тебя видеть. О каком знаке поговорим?
+        </li>
+      </condition>
+    </template>
+  </category>
+
+  <category>
+    <pattern>ЗДРАВСТВУЙ</pattern>
+    <template><srai>ПРИВЕТ</srai></template>
+  </category>
+
+  <category>
+    <pattern>ЗДРАВСТВУЙТЕ</pattern>
+    <template><srai>ПРИВЕТ</srai></template>
+  </category>
+
+  <category>
+    <pattern>МЕНЯ ЗОВУТ *</pattern>
+    <template>
+      <think><set name="user-name"><star/></set></think>
+      Приятно познакомиться, <get name="user-name"/>. Теперь я буду знать, как к тебе обращаться.
+      Спроси меня о любом топографическом знаке: большом доме, вышке, пасеке или ели.
+    </template>
+  </category>
+
+  <category>
+    <pattern>МОЕ ИМЯ *</pattern>
+    <template><srai>МЕНЯ ЗОВУТ <star/></srai></template>
+  </category>
+
+  <category>
+    <pattern>Я *</pattern>
+    <template><srai>МЕНЯ ЗОВУТ <star/></srai></template>
+  </category>
+
+  <category>
+    <pattern>КТО Я</pattern>
+    <template>
+      <condition name="user-name">
+        <li value="unknown">Я пока не знаю твоего имени. Представься, пожалуйста.</li>
+        <li>Ты <get name="user-name"/>.</li>
+      </condition>
+    </template>
+  </category>
+
+  <!-- ===== 2. Что умеет бот / список образов ===== -->
+
+  <category>
+    <pattern>ЧТО ТЫ УМЕЕШЬ</pattern>
+    <template>
+      Я умею рассказывать про топографические знаки и помогать с распознаванием образов.
+      В моей базе 8 знаков: большой дом, маленький дом, вышка, церковь, кладбище, юрта, пасека и ель.
+      Спроси, например: "Расскажи о большом доме" или "Что такое пасека".
+    </template>
+  </category>
+
+  <category>
+    <pattern>КАКИЕ ОБРАЗЫ ТЫ РАСПОЗНАЕШЬ</pattern>
+    <template>
+      Нейросеть умеет распознавать 8 топографических знаков:
+      большой дом, маленький дом, вышка, церковь, кладбище, юрта, пасека и ель.
+      Про какой знак рассказать?
+    </template>
+  </category>
+
+  <category>
+    <pattern>ЧТО ТЫ МОЖЕШЬ РАСПОЗНАВАТЬ</pattern>
+    <template><srai>КАКИЕ ОБРАЗЫ ТЫ РАСПОЗНАЕШЬ</srai></template>
+  </category>
+
+  <!-- ===== 3. Описание 8 топознаков + current_topic ===== -->
+
+  <!-- ключ: current_topic = big_house / small_house / tower / church / cemetery / yurt / apiary / fir -->
+
+  <category>
+    <pattern>РАССКАЖИ О БОЛЬШОМ ДОМЕ</pattern>
+    <template>
+      <think><set name="current_topic">big_house</set></think>
+      Большой дом — это крупное капитальное здание, обычно многоэтажное.
+      На карте обозначается прямоугольником, часто крупнее соседних строений.
+    </template>
+  </category>
+  <category><pattern>БОЛЬШОЙ ДОМ</pattern><template><srai>РАССКАЖИ О БОЛЬШОМ ДОМЕ</srai></template></category>
+  <category><pattern>ЧТО ТАКОЕ БОЛЬШОЙ ДОМ</pattern><template><srai>РАССКАЖИ О БОЛЬШОМ ДОМЕ</srai></template></category>
+
+  <category>
+    <pattern>РАССКАЖИ О МАЛЕНЬКОМ ДОМЕ</pattern>
+    <template>
+      <think><set name="current_topic">small_house</set></think>
+      Маленький дом — это небольшое строение, часто частный дом или дача.
+      На карте показывается маленьким тёмным прямоугольником.
+    </template>
+  </category>
+  <category><pattern>МАЛЕНЬКИЙ ДОМ</pattern><template><srai>РАССКАЖИ О МАЛЕНЬКОМ ДОМЕ</srai></template></category>
+  <category><pattern>ЧТО ТАКОЕ МАЛЕНЬКИЙ ДОМ</pattern><template><srai>РАССКАЖИ О МАЛЕНЬКОМ ДОМЕ</srai></template></category>
+
+  <category>
+    <pattern>РАССКАЖИ О ВЫШКЕ</pattern>
+    <template>
+      <think><set name="current_topic">tower</set></think>
+      Вышка — высотное сооружение, например наблюдательная или геодезическая.
+      На карте обозначается специальным условным знаком, часто в виде треугольника с точкой.
+    </template>
+  </category>
+  <category><pattern>ВЫШКА</pattern><template><srai>РАССКАЖИ О ВЫШКЕ</srai></template></category>
+  <category><pattern>ЧТО ТАКОЕ ВЫШКА</pattern><template><srai>РАССКАЖИ О ВЫШКЕ</srai></template></category>
+
+  <category>
+    <pattern>РАССКАЖИ О ЦЕРКВИ</pattern>
+    <template>
+      <think><set name="current_topic">church</set></think>
+      Церковь — культовое сооружение. На карте её здание выделяют крестом или особым символом на контуре.
+    </template>
+  </category>
+  <category><pattern>ЦЕРКОВЬ</pattern><template><srai>РАССКАЖИ О ЦЕРКВИ</srai></template></category>
+  <category><pattern>ЧТО ТАКОЕ ЦЕРКОВЬ</pattern><template><srai>РАССКАЖИ О ЦЕРКВИ</srai></template></category>
+
+  <category>
+    <pattern>РАССКАЖИ О КЛАДБИЩЕ</pattern>
+    <template>
+      <think><set name="current_topic">cemetery</set></think>
+      Кладбище — место захоронения. На карте может обозначаться контуром с крестиками
+      или затенённой площадью с подписью "кладб.".
+    </template>
+  </category>
+  <category><pattern>КЛАДБИЩЕ</pattern><template><srai>РАССКАЖИ О КЛАДБИЩЕ</srai></template></category>
+  <category><pattern>ЧТО ТАКОЕ КЛАДБИЩЕ</pattern><template><srai>РАССКАЖИ О КЛАДБИЩЕ</srai></template></category>
+
+  <category>
+    <pattern>РАССКАЖИ О ЮРТЕ</pattern>
+    <template>
+      <think><set name="current_topic">yurt</set></think>
+      Юрта — традиционное кочевое жилище. На карте обозначается как особый тип постройки,
+      иногда с подписью, указывающей на национальное жилище.
+    </template>
+  </category>
+  <category><pattern>ЮРТА</pattern><template><srai>РАССКАЖИ О ЮРТЕ</srai></template></category>
+  <category><pattern>ЧТО ТАКОЕ ЮРТА</pattern><template><srai>РАССКАЖИ О ЮРТЕ</srai></template></category>
+
+  <category>
+    <pattern>РАССКАЖИ О ПАСЕКЕ</pattern>
+    <template>
+      <think><set name="current_topic">apiary</set></think>
+      Пасека — место, где содержат ульи с пчёлами. На карте отмечается особым знаком
+      и часто подписью "пас." рядом.
+    </template>
+  </category>
+  <category><pattern>ПАСЕКА</pattern><template><srai>РАССКАЖИ О ПАСЕКЕ</srai></template></category>
+  <category><pattern>ЧТО ТАКОЕ ПАСЕКА</pattern><template><srai>РАССКАЖИ О ПАСЕКЕ</srai></template></category>
+
+  <category>
+    <pattern>РАССКАЖИ ОБ ЕЛИ</pattern>
+    <template>
+      <think><set name="current_topic">fir</set></think>
+      Ель — хвойное дерево, типичный представитель таёжных лесов.
+      На карте еловые леса показывают условными знаками хвойных насаждений.
+    </template>
+  </category>
+  <category><pattern>ЕЛЬ</pattern><template><srai>РАССКАЖИ ОБ ЕЛИ</srai></template></category>
+  <category><pattern>ЧТО ТАКОЕ ЕЛЬ</pattern><template><srai>РАССКАЖИ ОБ ЕЛИ</srai></template></category>
+
+  <!-- Обобщённые формы -->
+
+  <category>
+    <pattern>РАССКАЖИ О *</pattern>
+    <template><srai>РАССКАЖИ О <star/></srai></template>
+  </category>
+
+  <category>
+    <pattern>ЧТО ТАКОЕ *</pattern>
+    <template><srai>РАССКАЖИ О <star/></srai></template>
+  </category>
+
+  <!-- ===== 4. "Расскажи ещё" по current_topic (как у греческих букв) ===== -->
+
+  <category>
+    <pattern>РАССКАЖИ ЕЩЕ</pattern>
+    <template>
+      <condition name="current_topic">
+        <li value="big_house">
+          В кварталах с плотной застройкой большие дома образуют сложный "ландшафт улиц",
+          который сильно влияет на обзор и выбор маршрута.
+        </li>
+        <li value="small_house">
+          Маленькие дома в сельской местности часто стоят отдельно и поэтому
+          служат удобными ориентирами на местности.
+        </li>
+        <li value="tower">
+          Геодезические вышки использовались для построения триангуляционных сетей.
+          В полевых условиях они видны за много километров.
+        </li>
+        <li value="church">
+          Церкви — одни из самых стабильных ориентиров: их редко сносят,
+          поэтому по ним удобно сверять старые и новые карты.
+        </li>
+        <li value="cemetery">
+          Кладбища обычно располагают на окраинах населённых пунктов или на возвышенностях,
+          что тоже влияет на восприятие рельефа.
+        </li>
+        <li value="yurt">
+          Вход в юрту традиционно ориентируют на юг, по нему можно приблизительно
+          определить стороны света без компаса.
+        </li>
+        <li value="apiary">
+          Пасеки часто располагают рядом с лесом и полем, поэтому на карте рядом с ними
+          можно ожидать просеки и тропинки.
+        </li>
+        <li value="fir">
+          Еловые леса обычно более тёмные и плотные, чем сосновые, и их труднее проходить,
+          что важно учитывать при планировании маршрута.
+        </li>
+        <li value="unknown">
+          Мы ещё не выбрали знак. Спроси меня, например, о большом доме или вышке.
+        </li>
+        <li>Больше интересных фактов об этом у меня нет.</li>
+      </condition>
+    </template>
+  </category>
+
+  <category><pattern>ПОДРОБНЕЕ</pattern><template><srai>РАССКАЖИ ЕЩЕ</srai></template></category>
+  <category><pattern>ЕЩЕ</pattern><template><srai>РАССКАЖИ ЕЩЕ</srai></template></category>
+  <category><pattern>ЧТО ЕЩЕ</pattern><template><srai>РАССКАЖИ ЕЩЕ</srai></template></category>
+  <category><pattern>А ЧТО ЕЩЕ ТЫ ЗНАЕШЬ</pattern><template><srai>РАССКАЖИ ЕЩЕ</srai></template></category>
+  <category><pattern>ЧТО ЕЩЕ ТЫ О НЕЙ ЗНАЕШЬ</pattern><template><srai>РАССКАЖИ ЕЩЕ</srai></template></category>
+  <category><pattern>ЧТО ЕЩЕ ТЫ О НЕМ ЗНАЕШЬ</pattern><template><srai>РАССКАЖИ ЕЩЕ</srai></template></category>
+
+  <!-- О чём мы говорим? -->
+
+  <category>
+    <pattern>О ЧЕМ МЫ</pattern>
+    <template>
+      <condition name="current_topic">
+        <li value="unknown">Мы пока просто болтаем. Хочешь поговорить о топографических знаках?</li>
+        <li>Мы обсуждаем образ: <get name="current_topic"/>. Хочешь узнать о нём подробнее?</li>
+      </condition>
+    </template>
+  </category>
+
+  <category><pattern>КАКАЯ ТЕМА</pattern><template><srai>О ЧЕМ МЫ</srai></template></category>
+  <category><pattern>НАПОМНИ О ЧЕМ МЫ</pattern><template><srai>О ЧЕМ МЫ</srai></template></category>
+
+  <!-- ===== 5. Связка с нейросетью (как RECOGNIZED в греческом примере) ===== -->
+
+  <category>
+    <pattern>RECOGNIZED *</pattern>
+    <template>
+      <think>
+        <set name="current_topic"><star/></set>
+        <set name="questioned">true</set>
+      </think>
+      Я вижу знак: <star/>. Хочешь, расскажу о нём подробнее?
+    </template>
+  </category>
+
+  <category>
+    <pattern>ДАВАЙ</pattern>
+    <template>
+      <condition name="questioned">
+        <li value="true">
+          <condition name="current_topic">
+            <li value="big_house"><srai>РАССКАЖИ О БОЛЬШОМ ДОМЕ</srai></li>
+            <li value="small_house"><srai>РАССКАЖИ О МАЛЕНЬКОМ ДОМЕ</srai></li>
+            <li value="tower"><srai>РАССКАЖИ О ВЫШКЕ</srai></li>
+            <li value="church"><srai>РАССКАЖИ О ЦЕРКВИ</srai></li>
+            <li value="cemetery"><srai>РАССКАЖИ О КЛАДБИЩЕ</srai></li>
+            <li value="yurt"><srai>РАССКАЖИ О ЮРТЕ</srai></li>
+            <li value="apiary"><srai>РАССКАЖИ О ПАСЕКЕ</srai></li>
+            <li value="fir"><srai>РАССКАЖИ ОБ ЕЛИ</srai></li>
+            <li>Я помню, что мы что-то обсуждали, но не могу найти информацию об этом.</li>
+          </condition>
+        </li>
+        <li>Что именно ты хочешь узнать?</li>
+      </condition>
+      <think><set name="questioned">false</set></think>
+    </template>
+  </category>
+
+  <category><pattern>ДА</pattern><template><srai>ДАВАЙ</srai></template></category>
+  <category><pattern>ХОЧУ</pattern><template><srai>ДАВАЙ</srai></template></category>
+  <category><pattern>РАССКАЖИ</pattern><template><srai>ДАВАЙ</srai></template></category>
+
+  <!-- ===== Ответы на другие вопросы и перевод на нашу тему ===== -->
+
+  <!-- Как дела -->
+  <category>
+    <pattern>КАК ДЕЛА</pattern>
+    <template>
+      У меня всё стабильно, я просто программа для работы с топографическими знаками.
+      А у тебя как дела, <get name="user-name"/>?
+    </template>
+  </category>
+
+  <category>
+    <pattern>КАК ТЫ</pattern>
+    <template><srai>КАК ДЕЛА</srai></template>
+  </category>
+
+  <!-- Спасибо -->
+  <category>
+    <pattern>СПАСИБО</pattern>
+    <template>
+      Пожалуйста! Если хочешь, могу рассказать ещё про какой-нибудь знак —
+      например про вышку или кладбище.
+    </template>
+  </category>
+
+  <!-- Пока -->
+  <category>
+    <pattern>ПОКА</pattern>
+    <template>
+      Пока! Было приятно пообщаться. Возвращайся, если захочешь потренироваться
+      с топографическими знаками.
+    </template>
+  </category>
+
+  <!-- Общий "непредвиденный" вопрос: мягко переводим на тему топознаков -->
+  <category>
+    <pattern>*</pattern>
+    <template>
+      <condition name="askname">
+        <li value="yes">
+          <think>
+            <set name="user-name"><star/></set>
+            <set name="askname">no</set>
+          </think>
+          Приятно познакомиться, <get name="user-name"/>. 
+          Теперь я буду знать, как к тебе обращаться.
+          Спроси меня о любом топографическом знаке: большом доме, вышке, пасеке или ели.
+        </li>
+        <li>
+          Я не до конца понял твой вопрос.
+          Но я хорошо разбираюсь в топографических знаках: большом доме, маленьком доме,
+          вышке, церкви, кладбище, юрте, пасеке и ели.
+          Спроси, например: "Расскажи о вышке" или "Что такое пасека".
+        </li>
+      </condition>
+    </template>
+  </category>
+
+
+  <category>
+  <pattern>RECOGNIZED *</pattern>
+  <template>
+    <think><set name="current_topic"><star/></set></think>
+    Я вижу знак: <star/>. Хочешь, расскажу о нём подробнее?
+  </template>
+</category>
+
+</aiml>
